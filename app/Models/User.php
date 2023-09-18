@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -54,4 +56,67 @@ class User extends Authenticatable
         'dob' => 'date',
         'password' => 'hashed',
     ];
+
+    public function image(): HasOne
+    {
+        return $this->hasOne(UserImage::class);
+    }
+
+    public function profileComplete(): bool
+    {
+        $requiredFields = [
+            'reg_no', 'name', 'id_no', 'gender', 'address', 'email',
+            'dob', 'campus'
+        ];
+
+        foreach ($requiredFields as $field) {
+            if (empty($this->$field)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function unreadNotificationCount(): int
+    {
+        $unreadCount = 0;
+
+        // Loop through each notification associated with the user
+        $notifications = $this->allNotifications();
+        foreach ($notifications as $notification) {
+            if (!$notification->isReadByUser($this->id)) {
+                $unreadCount++;
+            }
+        }
+
+        return $unreadCount;
+    }
+
+    public function allNotifications(): \Illuminate\Database\Eloquent\Collection
+    {
+        return Notification::allForUser($this->id)->get();
+    }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function readNotifications(): \Illuminate\Database\Eloquent\Collection
+    {
+        return Notification::readForUser($this->id)->get();
+    }
+
+    public function getUnreadNotificationsAttribute(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->unreadNotifications();
+    }
+
+    //get unread notifications
+
+    public function unreadNotifications(): \Illuminate\Database\Eloquent\Collection
+    {
+        return Notification::unreadForUser($this->id)->get();
+    }
 }

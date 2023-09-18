@@ -8,11 +8,15 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
             ],
-            refresh: [
-                'resources/routes/**',
-                'routes/**',
+            watch: [
                 'resources/views/**',
+                'routes/**',
+                'resources/routes/**',
             ],
+            refresh: [{
+                paths: ['\'resources/views/**\', \'routes/**\', \'resources/routes/**\''],
+                config: { delay: 300 }
+            }],
         }),
     ],
 });
