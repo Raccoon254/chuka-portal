@@ -17,14 +17,6 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
-     */
-    public function create(): View
-    {
-        return view('auth.register');
-    }
-
-    /**
      * Handle an incoming registration request.
      *
      * @throws ValidationException
@@ -33,7 +25,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'], // Note the change in the unique rule
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'reg_no' => ['required', 'string', 'max:255', 'unique:users,reg_no'],
             'id_no' => ['required', 'string', 'max:255', 'unique:users,id_no'],
@@ -47,6 +39,7 @@ class RegisteredUserController extends Controller
             'total_billed' => ['nullable', 'numeric'],
             'total_paid' => ['nullable', 'numeric'],
             'fee_balance' => ['nullable', 'numeric'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Image validation
         ]);
 
         $user = User::create([
@@ -67,11 +60,27 @@ class RegisteredUserController extends Controller
             'fee_balance' => $request->fee_balance,
         ]);
 
+        // Handle the user image upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('user_images', 'public');
+
+            // Create a record in the user_images table
+            $user->image()->create(['image_path' => $imagePath]);
+        }
+
         event(new Registered($user));
 
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+    /**
+     * Display the registration view.
+     */
+    public function create(): View
+    {
+        return view('auth.register');
     }
 
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -56,6 +57,26 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function image(): HasOne
+    {
+        return $this->hasOne(UserImage::class);
+    }
+
+    public function profileComplete(): bool
+    {
+        $requiredFields = [
+            'reg_no', 'name', 'id_no', 'gender', 'address', 'email',
+            'dob', 'campus'
+        ];
+
+        foreach ($requiredFields as $field) {
+            if (empty($this->$field)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public function unreadNotificationCount(): int
     {

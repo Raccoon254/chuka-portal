@@ -23,16 +23,27 @@
         </div>
         <div class="navbar-end items-center">
 
+            <!--Search-->
+            <div class="hidden mx-2 lg:flex lg:items-center">
+                <div class="relative text-gray-500">
+                    <input type="search" name="search" placeholder="Search"
+                           class="h-10 bg-base-300 px-5 pr-10 rounded-full text-sm focus:outline-none">
+                    <button type="submit" class="absolute right-0 top-0 mt-2 mx-4">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
 
             @auth
                 <!-- Notifications -->
-                <a class="indicator" href="{{ route('notifications.user') }}">
+                <a data-tip="Notifications" class="indicator tooltip tooltip-bottom"
+                   href="{{ route('notifications.user') }}">
                     <span
                         class="indicator-item bg-orange-500 flex items-center justify-center text-gray-50 w-[15px] h-[15px] border text-xs px-1 rounded-full">
                         <!-- Get the total count of unread notifications -->
                         {{ Auth::user()->unreadNotificationCount() }}
                     </span>
-                    <section class="btn btn-sm btn-circle">
+                    <section class="btn ring btn-sm btn-circle">
                         <i class="fa-solid fa-bell"></i>
                     </section>
                 </a>
@@ -47,8 +58,9 @@
                             <div data-tip="{{ Auth::user()->name ?? 'Guest' }}"
                                  class="transition tooltip tooltip-bottom text-xl btn p-0 btn-ghost btn-circle flex ease-in-out duration-150">
                                 <div class="avatar">
-                                    <div class="w-6 rounded-full ring ring-1 ring-offset-base-100 ring-offset-2">
-                                        <img src="{{ Auth::user()->name ?? 'Guest' }}" alt=""/>
+                                    <div class="w-8 rounded-full ring-1 ring-offset-base-100 ring-offset-2">
+                                        <img src="{{ asset('storage/' . Auth::user()->image->image_path) }}"
+                                             alt="{{ Auth::user()->name }}"/>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +108,8 @@
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
                               stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M4 6h16M4 12h16M4 18h16"/>
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
+                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
+                              stroke-linecap="round"
                               stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
@@ -119,7 +132,8 @@
             <div class="px-4">
                 <div
                     class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name ?? 'Guest' }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email ?? 'loggedout@tests.com' }}</div>
+                <div
+                    class="font-medium text-sm text-gray-500">{{ Auth::user()->email ?? 'loggedout@tests.com' }}</div>
             </div>
 
             <div class="mt-3 space-y-1">

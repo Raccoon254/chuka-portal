@@ -5,6 +5,9 @@
         <section
             class="menu p-2 flex flex-col z-30 gap-2 mt-16 sm:mt-0 w-[250px] bg-base-200 text-base-content lg:block">
 
+
+            <x-application-logo class="w-20 h-20 mx-auto"/>
+
             <header class="text-[15px] py-[10px] px-[8px] mx-[8px] border-b">
                 DASHBOARD
             </header>
@@ -92,7 +95,7 @@
 
             <!--Light Mode-->
 
-            <a class="sidebar-item">
+            <div class="sidebar-item">
                 <!-- Dark Mode Switch -->
                 <label class="swap swap-rotate">
                     <!-- this hidden checkbox controls the state -->
@@ -110,6 +113,10 @@
                             d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
                     </svg>
                 </label>
+
+                <span id="theme-button">
+                    Change Mode
+                </span>
 
                 <script>
 
@@ -194,6 +201,21 @@
                         }
                     });
 
+                    const themeButton = document.querySelector('#theme-button');
+
+                    themeButton.addEventListener('click', () => {
+                        const html = document.querySelector('html');
+                        const currentTheme = html.getAttribute('data-theme');
+
+                        if (currentTheme === 'dark') {
+                            html.setAttribute('data-theme', 'light');
+                            setThemeInSession('light'); // Save the theme in session
+                        } else {
+                            html.setAttribute('data-theme', 'dark');
+                            setThemeInSession('dark'); // Save the theme in session
+                        }
+                    });
+
                     // Apply the saved theme when the page loads
                     window.addEventListener('load', () => {
                         applySavedTheme();
@@ -201,8 +223,7 @@
 
                 </script>
 
-                Change Mode
-            </a>
+            </div>
 
             <a class="sidebar-item">
                 <i class="fa-solid fa-sign-out"></i>
