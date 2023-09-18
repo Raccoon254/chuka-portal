@@ -7,9 +7,9 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="regNumber" :value="__('Registration Number')" />
-            <x-text-input placeholder="Eb3/49091/20" id="regNumber" class="block mt-1 w-full" type="text" name="regNumber" :value="old('regNumber')" required autofocus autocomplete="regNumber" />
-            <x-input-error :messages="$errors->get('regNumber')" class="mt-2" />
+            <x-input-label for="reg_no" :value="__('Registration Number')" />
+            <x-text-input placeholder="Eb3/49091/20" id="reg_no" class="block mt-1 w-full" type="text" name="reg_no" :value="old('reg_no')" required autofocus autocomplete="reg_no" />
+            <x-input-error :messages="$errors->get('reg_no')" class="mt-2" />
         </div>
 
         <!-- Password -->

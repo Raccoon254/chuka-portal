@@ -15,6 +15,9 @@
             @endif
             <!-- Page Content -->
 
+            <!--Session Alerts-->
+            @include('session.alerts')
+
             <main>
                 {{ $slot }}
             </main>

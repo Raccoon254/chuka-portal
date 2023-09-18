@@ -3,6 +3,26 @@
 @tailwind utilities;
 
 
+.sidebar-item {
+    @apply flex hover:bg-base-100 active:bg-base-200 active:text-amber-50 text-[15px] py-[10px] px-[16px] mx-[16px] gap-3 md:my-[10px] items-center flex-row rounded;
+}
+
+.sidebar-item-lock {
+    @apply flex tooltip hover:bg-base-100 active:bg-base-200 active:text-amber-50 text-[15px] py-[10px] px-[16px] mx-[16px] gap-3 md:my-[10px] items-center flex-row rounded;
+}
+
+.active {
+    @apply bg-blue-400 hover:bg-accent text-amber-50;
+}
+
+.form-group {
+    @apply flex flex-col gap-2 my-6;
+}
+
+.side-lock {
+    @apply text-xs text-gray-700;
+}
+
 /* Theme Button */
 .swap {
     position: fixed;
@@ -10,4 +30,33 @@
     left: 10px;
     z-index: 9999;
     cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #5151f1;
+    height: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: orangered;
+    border-radius: 5px;
+    height: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: orangered;
+    height: 5px;
+}
+
+.custom-z {
+    z-index: 9999 !important;
 }
