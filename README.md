@@ -27,16 +27,20 @@ Livewire - An elegant library for Laravel that makes building dynamic interfaces
 
 3. Improved Performance: Optimizing both frontend and backend to ensure faster load times and smoother user interactions.
 
+## TODO
+- [ ] Intergrate the existing database
+- [x] Create a new UI
+
 ## Getting Started
 Clone the repository:
 
-`git clone [404]`
+`git clone https://github.com/Raccoon254/chuka-portal.git chukaportal`
 
 Navigate to the project directory:
 
-`cd [404]`
+`cd chukaportal`
 
-Install dependencies:
+Install composer dependencies:
 
 `composer install`
 
@@ -50,7 +54,7 @@ Install npm dependencies: ie Vite
 
 Start the local development server:
 
-`npm start`
+`npm start` or [`npm run dev` and `php artisan serve`]
 
 This will concurrently run the Laravel development server and the Webpack development server.
 Visit http://localhost:8000 in your browser to access the portal.
