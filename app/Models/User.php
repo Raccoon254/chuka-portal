@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,8 +17,20 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'reg_no',
         'name',
+        'id_no',
+        'gender',
+        'address',
         'email',
+        'dob',
+        'campus',
+        'current_programme',
+        'attempted_units',
+        'registered_units',
+        'total_billed',
+        'total_paid',
+        'fee_balance',
         'password',
     ];
 
@@ -40,6 +51,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'dob' => 'date',
         'password' => 'hashed',
     ];
 }

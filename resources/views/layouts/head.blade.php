@@ -11,14 +11,5 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        .swap {
-            position: fixed;
-            top: 10px; /* Initial position */
-            left: 10px; /* Initial position */
-            z-index: 9999;
-            cursor: pointer;
-        }
-    </style>
 
 </head>

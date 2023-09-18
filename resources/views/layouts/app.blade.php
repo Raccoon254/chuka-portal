@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="{{ session('theme', 'dark') }}" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html data-theme="{{ session('theme', 'light') }}" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('layouts.head')
     <body class="font-sans antialiased">
         <div class="min-h-screen">
@@ -62,7 +62,7 @@
                         })
                         .catch(error => {
                             console.error(error);
-                            return 'dark';
+                            return 'light';
                         });
                 };
 
@@ -107,6 +107,7 @@
                 window.addEventListener('load', () => {
                     applySavedTheme();
                 });
+
             </script>
         </div>
     </body>
