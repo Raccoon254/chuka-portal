@@ -63,4 +63,4 @@ Contribution
 Contributions are welcome! Please create an issue or submit a pull request if you'd like to contribute to the project.
 
 License
-This project is licensed under the MIT License.
+This project is licensed under the Apache License.
