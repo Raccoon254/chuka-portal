@@ -41,7 +41,7 @@
                     <span
                         class="indicator-item bg-orange-500 flex items-center justify-center text-gray-50 w-[15px] h-[15px] border text-xs px-1 rounded-full">
                         <!-- Get the total count of unread notifications -->
-                        {{ Auth::user()->unreadNotificationCount() }}
+                        {{ Auth::user()->unreadNotificationCount() ?? '9' }}
                     </span>
                     <section class="btn ring btn-sm btn-circle">
                         <i class="fa-solid fa-bell"></i>
@@ -59,8 +59,9 @@
                                  class="transition tooltip tooltip-bottom text-xl btn p-0 btn-ghost btn-circle flex ease-in-out duration-150">
                                 <div class="avatar">
                                     <div class="w-8 rounded-full ring-1 ring-offset-base-100 ring-offset-2">
-                                        <img src="{{ asset('storage/' . Auth::user()->image->image_path) }}"
-                                             alt="{{ Auth::user()->name }}"/>
+                                        <img
+                                            src="{{ asset('storage/user_images/QvuwNTVS6Webd005YeZW9Ek4kxM8IlqGXGDpuN48.jpg') }}"
+                                            alt="{{ Auth::user()->name ?? null }}"/>
                                     </div>
                                 </div>
                             </div>
